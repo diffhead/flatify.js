@@ -22,7 +22,7 @@
     "flatify.js",
     "library"
   ],
-  "author": "",
+  "author": "Viktor Smagin <thinlineseverywhere@gmail.com> (https://github.com/diffhead)",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/diffhead/flatify.js/issues"
