@@ -79,9 +79,9 @@
 
 ## FlatKeyTools API
 
-    public static FlatKeyTools.getKeyFromParts(...parts: Array<string>): string
-    public static FlatKeyTools.getDotNotationKey(...parts:  Array<string>): string
-    public static FlatKeyTools.dotsToBrackets(key: string, removeArrayIndexes: boolean = true): string
+    public static getKeyFromParts(...parts: Array<string>): string
+    public static getDotNotationKey(...parts:  Array<string>): string
+    public static dotsToBrackets(key: string, removeArrayIndexes: boolean = true): string
 
 ## Types
 
