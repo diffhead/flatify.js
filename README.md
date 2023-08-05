@@ -64,11 +64,11 @@
 
 ## FlatObject API
 
-    public listKeys():  Array<string>;
-    public hasKey(key:  string):  boolean;
-    public get(key:  string):  string|number|symbol|boolean|null;
-    public getRaw():  FlatAvailableKeyValueObject;
-    public getFlat():  FlatKeyValueObject;
+    public listKeys():  Array<string>
+    public hasKey(key:  string):  boolean
+    public get(key:  string):  string|number|symbol|boolean|null
+    public getRaw():  FlatAvailableKeyValueObject
+    public getFlat():  FlatKeyValueObject
 
 ## FlatTools API
 
