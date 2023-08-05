@@ -1,0 +1,35 @@
+{
+  "name": "flatify.js",
+  "version": "1.0.1",
+  "description": "Flatify objects, convert it to form string, search params etc.",
+  "main": "lib/index.js",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "tsc -p ./tsconfig.extended.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diffhead/flatify.js.git"
+  },
+  "keywords": [
+    "flat",
+    "flatify",
+    "flatten",
+    "object",
+    "javascript",
+    "typescript",
+    "js",
+    "flatify.js",
+    "library"
+  ],
+  "author": "",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/diffhead/flatify.js/issues"
+  },
+  "homepage": "https://github.com/diffhead/flatify.js#readme",
+  "dependencies": {
+    "@types/node": "^20.4.7",
+    "typescript": "^5.1.6"
+  }
+}

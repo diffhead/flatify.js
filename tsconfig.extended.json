@@ -1,0 +1,22 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "declaration": true,
+        "moduleResolution": "Node",
+        "rootDir": "./src",
+        "outDir": "./lib",
+        "types": [
+            "@types/node"
+        ]
+    },
+    "include": [
+        "./src"
+    ],
+    "exclude": [
+        "./node_modules"
+    ],
+    "files": [
+        "src/index.ts"
+    ]
+}
