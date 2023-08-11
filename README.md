@@ -36,14 +36,20 @@
     /**
      * @var formParams: string
      * 
-     * [configuration][system]=1&[configuration][flags][]=isolated&
+     * [configuration][system]=1&
+     * [configuration][flags][]=isolated&
      * [configuration][flags][]=kernel&
      * [configuration][flags][]=module
      */
     const formParams = FlatTools.toFormString(flat);
 
 	/**
-	 * Getting application/x-www-form-urlencoded string
+	 * @var formParamsUrlEncoded: string
+     * 
+     * %5Bconfiguration%5D%5Bsystem%5D%3D1%26
+     * %5Bconfiguration%5D%5Bflags%5D%5B%5D%3Disolated%26
+     * %5Bconfiguration%5D%5Bflags%5D%5B%5D%3Dkernel%26
+     * %5Bconfiguration%5D%5Bflags%5D%5B%5D%3Dmodule
 	 */
 	const formParamsUrlEncoded = FlatTools.toUrlSearchParams(flat).toString();
 	
@@ -85,8 +91,7 @@
 
 ## Types
 
-    KeyValueObject<KeyType extends string|number|symbol, ValueType> =
-    {
+    KeyValueObject<KeyType extends string|number|symbol, ValueType> = {
 		[key  in  KeyType]:  ValueType
 	}
 
