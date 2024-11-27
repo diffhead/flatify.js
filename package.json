@@ -1,7 +1,7 @@
 {
   "name": "flatify.js",
-  "version": "1.1.2",
-  "description": "Flatify objects, convert it to form string, search params etc.",
+  "version": "1.2.0",
+  "description": "Flatify objects, convert it to form string and search params",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {

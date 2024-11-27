@@ -1,7 +1,7 @@
 # Flatify.js
 
 > This is the simple library for flatifying the objects,
-> converting them to form string, search params, etc.
+> converting them to form string and search params.
 
 ## Usage
 
@@ -11,89 +11,93 @@
 
 #### Import
 
-    import { FlatObject, FlatTools, FlatKeyTools } from 'flatify.js'
+```javascript
+import { FlatifyJS } from 'flatify.js'
+```
 
-## Flatify object
-   
-    const object = {
-        configuration: {
-            system: true,
-            flags: [
-                "isolated", "kernel", "module"
-            ]
+#### Prepare object
+
+```javascript
+const object = {
+    text: 'Hello, it`s just a text',
+    object: {
+        text: {
+            content: 'Hello it`s just a deep text',
+            settings: {
+                font: {
+                    name: 'Ubuntu',
+                    type: 'Regular',
+                    size: '12px',
+                    wight: 500
+                }
+            }
         }
-    };
-    
-    const flat = new FlatObject(object);
-    
-## Convert it
+    }
+};
+```
 
-    /**
-     * @var urlSearchParams: URLSearchParams
-     */
-    const urlSearchParams = FlatTools.toUrlSearchParams(flat);
-    
-    /**
-     * @var formParams: string
-     * 
-     * [configuration][system]=1&
-     * [configuration][flags][]=isolated&
-     * [configuration][flags][]=kernel&
-     * [configuration][flags][]=module
-     */
-    const formParams = FlatTools.toFormString(flat);
+#### Interact with FlatKeyValueObject
 
-	/**
-	 * @var formParamsUrlEncoded: string
-     * 
-     * %5Bconfiguration%5D%5Bsystem%5D%3D1%26
-     * %5Bconfiguration%5D%5Bflags%5D%5B%5D%3Disolated%26
-     * %5Bconfiguration%5D%5Bflags%5D%5B%5D%3Dkernel%26
-     * %5Bconfiguration%5D%5Bflags%5D%5B%5D%3Dmodule
-	 */
-	const formParamsUrlEncoded = FlatTools.toUrlSearchParams(flat).toString();
-	
-    /** 
-     * @var flatKeyValueObject: FlatKeyValueObject = { 'a.b': 1 }
-     */
-    const flatKeyValueObject = FlatTools.toFlatKeyValueObject({
-        a: {
-            b: true
-        }
-    });
-    
-    /**
-     * @var keyValueObject: KeyValueObject<string, string|number|symbol|object|null>
-     */
-    const keyValueObject = FlatTools.toKeyValueObject(flat);
+```javascript
+/**
+ * @type FlatKeyValueObject
+ *
+ * FlatKeyValueObject {
+ *   object: {
+ *       'text': 'Hello, its just a text',
+ *       'object.text.content': 'Hello, its an object text',
+ *       'object.text.settings.font.name': 'Ubuntu',
+ *       'object.text.settings.font.type': 'Regular',
+ *       'object.text.settings.font.size': '12px',
+ *       'object.text.settings.font.weight': '500'
+ *   }
+ * }
+*/
+const flat = FlatifyJS.toFlatKeyValueObject(object);
 
+/**
+ * @type string[]
+ *
+ * [
+ *    'text',
+ *    'object.text.content',
+ *    'object.text.settings.font.name',
+ *    'object.text.settings.font.type',
+ *    'object.text.settings.font.size',
+ *    'object.text.settings.font.weight'
+ * ]
+ */
+const keys = flat.keys();
 
-## FlatObject API
+/**
+ * @type number
+ */
+const value = flat.value('object.text.settings.font.weight');
+```
 
-    public listKeys():  Array<string>
-    public hasKey(key:  string):  boolean
-    public get(key:  string):  string|number|symbol|boolean|null
-    public getRaw():  FlatAvailableKeyValueObject
-    public getFlat():  FlatKeyValueObject
+#### Convert it
 
-## FlatTools API
+```javascript
+/**
+ * @type string
+ *
+ * data[text]=Hello, its just a text&data[object][text][content]=Hello, its an object text&
+ * data[object][text][settings][font][name]=Ubuntu&data[object][text][settings][font][type]=Regular&
+ * data[object][text][settings][font][size]=12px&data[object][text][settings][font][weight]=500
+ */
+const formString = FlatifyJS.toFormString(object, 'data');
 
-    public static toFlatKeyValueObject(object: FlatAvailableKeyValueObject, keyOfObject: string = ''): FlatKeyValueObject
-    public static toFormString(object: FlatObject, keyOfObject: string = '', useArrayIndexes: boolean = false): string
-    public static toUrlSearchParams(object: FlatObject, keyOfObject: string = '', useArrayIndexes: boolean = false): URLSearchParams
-    public static toKeyValueObject(object: FlatObject): FlatAvailableKeyValueObject
-
-## FlatKeyTools API
-
-    public static getKeyFromParts(...parts: Array<string>): string
-    public static getDotNotationKey(...parts:  Array<string>): string
-    public static dotsToBrackets(key: string, removeArrayIndexes: boolean = true): string
-
-## Types
-
-    KeyValueObject<KeyType extends string|number|symbol, ValueType> = {
-		[key  in  KeyType]:  ValueType
-	}
-
-	FlatKeyValueObject = KeyValueObject<string, string|number|symbol|boolean|null>
-	FlatAvailableKeyValueObject = KeyValueObject<string, object|string|number|symbol|boolean|null>
+/**
+ * @type URLSearchParams
+ *
+ * URLSearchParams {
+ *   'data[text]' => 'Hello, its just a text',
+ *   'data[object][text][content]' => 'Hello, its an object text',
+ *   'data[object][text][settings][font][name]' => 'Ubuntu',
+ *   'data[object][text][settings][font][type]' => 'Regular',
+ *   'data[object][text][settings][font][size]' => '12px',
+ *   'data[object][text][settings][font][weight]' => '500'
+ * }
+ */
+const urlParams = FlatifyJS.toUrlSearchParams(object, 'data');
+```
